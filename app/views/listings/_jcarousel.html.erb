@@ -1,0 +1,72 @@
+
+<div class="stage">
+  <div class="carousel carousel-stage">
+    <ul>
+      <% @listing.property_photos.each do |photo| %>
+        <% if not photo.photo_url_url.blank? %>
+          <li style="position:relative"><%= image_tag(photo.photo_url_url) %></li>
+        <% end %>
+      <% end %>
+      <% @listing.property_floorplans.each do |photo| %>
+        <% if not photo.floorplan_url_url.blank? %>
+          <li style="position:relative"> 
+            <% if photo.floorplan_url_url.include? ".ai" %>
+              <%= image_tag(photo.floorplan_url_url.gsub!('.ai','.jpg')) %>
+            <% else %>
+              <%= image_tag(photo.floorplan_url_url) %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      <% @listing.property_videos.each do |photo| %>
+        <% if not photo.video_url.blank? %>
+          <li style="position:relative">
+            <% if photo.video_url.include? "watch" %>
+              <iframe id="show_video" style="width:100%;height: 100%;"
+              src="https://www.youtube.com/embed/<%= (photo.video_url).split('=')[1] %>">
+              </iframe>
+            <% else %>
+              <iframe  style="width:100%;height: 100%;"
+                src="<%= photo.video_url %>">
+              </iframe> 
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <a href="#" class="prev prev-stage"><span>&lsaquo;</span></a>
+  <a href="#" class="next next-stage"><span>&rsaquo;</span></a>
+</div>
+<div class="row">
+  <div class="col-md-12" align="right">
+    <% if @listing.property_floorplans.count > 0 %><button class="btn btn-primary floorplan">Floorplans</button><% end %>
+    <% if @listing.property_videos.count > 0 %><button class="btn btn-primary video">Videos</button><% end %>
+  </div>
+</div>
+<div class="navigation">
+  <a href="#" class="prev prev-navigation">&lsaquo;</a>
+  <a href="#" class="next next-navigation">&rsaquo;</a>
+  <div class="carousel carousel-navigation">
+    <ul>
+      <% @listing.property_photos.each do |photo| %>
+        <% if not photo.photo_url_url.blank? %>
+          <li><%= image_tag(photo.photo_url_url(:thumb), width: 50, :height => 50) %></li>
+        <% end %>
+      <% end %>
+      <% @listing.property_floorplans.each do |photo| %>
+        <% if not photo.floorplan_url_url.blank? %>
+          <li class="floorplan_thumb"><a href="#"><img src="//cdn-assets-s3.streeteasy.com/assets/icons/floorplan-59b645d2c000abd2fe938f1b23f05e3ced832ac6d2bf27cdc6d560710494b786.png" style="width:50px;height:50px"></a></li>
+        <% end %>
+      <% end %>
+      <% @listing.property_videos.each do |photo| %>
+        <% if not photo.video_url.blank? %>
+          <li class="video_thumb">
+            <div style="height: 50px;width: 50px;padding: 5px;"><div style="background-color: #0080c6;height: 100%;width: 100%;color:white;text-align:center;padding-top: 5px;"><span class="glyphicon glyphicon-facetime-video"></span><p style="font-size: 10px;">video</p></div></div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

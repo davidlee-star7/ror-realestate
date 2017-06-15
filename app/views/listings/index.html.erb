@@ -1,0 +1,24 @@
+<% provide :title, 'Listings' %>
+<div class="row row-offcanvas row-offcanvas-left">
+
+  <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+    <%= form_tag(listings_path, :method => :get, role: 'form', id: 'filter_form') do %>
+        <%= render 'filter_fields' %>
+    <% end %>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9">
+    <p class="pull-left visible-xs">
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle sidebar</button>
+    </p>
+    <div class="page-header">
+      <h1>Listings
+        <small>Use sidebar to filter listings.</small>
+      </h1>
+    </div>
+    <div class="row">
+      <%= render 'listings_content' %>
+    </div><!--/row-->
+  </div><!--/.col-xs-12.col-sm-9-->
+
+</div>

@@ -1,0 +1,22 @@
+<div class="col-sm-6 col-md-3">
+  <fieldset>
+    <div class="thumbnail">
+      <% if not f.object.blank? and not f.object.video_url_url.blank? %>
+        <video style="width:100%;height:100%" poster="<%= f.object.video_url_url.gsub!('.mp4','.jpg') %>" controls="controls">
+            <source src="<%= f.object.video_url_url.gsub!('.mp4','.webm') %>" type="video/webm">
+            <source src="<%= f.object.video_url_url %>" type="video/mp4">
+            <source src="<%= f.object.video_url_url.gsub!('.mp4','.ogv') %>" type="video/ogg">
+          </video>
+      <% end %>
+      <div class="caption">
+        <div class="form-group">
+          <%= f.label :order_num, 'Order', class: 'sr-only control-label' %>
+          <%= f.text_field :order_num, class: 'form-control', placeholder: 'Order' %>
+        </div>
+
+        <%= f.hidden_field :_destroy %>
+        <%= link_to 'remove', '#', class: 'remove_fields' %>
+      </div>
+    </div>
+  </fieldset>
+</div>
